@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+    <meta name="robots" content="none" />
+    <title>404 Page Not Found</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        :-webkit-full-screen {
+            background-color: #09c !important;
+        }
+
+        body {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #09c;
+            color: #fff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .info {
+            margin: 5% 8%;
+        }
+
+        .event,
+        .more,
+        .help {
+            padding-left: 8px;
+        }
+
+        .face {
+            font-size: 100px;
+        }
+
+        p {
+            margin: 10px 0;
+            padding: 8px 0;
+        }
+
+        .event {
+            font-size: 50px;
+            line-height: 40px;
+        }
+
+        .more {
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        .help {
+            position: absolute;
+            margin-top: 80px;
+            width: 100%;
+            height: 150px;
+            font-size: 16px;
+        }
+
+        .qrcode {
+            position: absolute;
+            display: block;
+            margin-top: 20px;
+            width: 125px;
+            height: 125px;
+            background: url(https://img.cohesions.cn//usr/uploads/2019/07/1248048884.png) no-repeat center center/cover;
+        }
+
+        .tips {
+            position: absolute;
+            position: absolute;
+            left: 140px;
+            display: block;
+            line-height: 18px;
+        }
+
+        @media screen and (max-width : 981px) {
+            .info {
+                margin: 30px;
+            }
+
+            .event {
+                font-size: 18px;
+                line-height: 30px;
+            }
+
+            .more {
+                font-size: 14px;
+            }
+
+            .tips {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body onclick="launchFullScreen(document.documentElement)">
+    <div class="info">
+        <span class="face">:(</span><br><br>
+        <p class="event">
+            404 Not Found
+        </p>
+        <br />
+        <p class="more">
+            正在跳转至博客首页 <span id="sec">0</span> %
+        </p>
+
+        <div class="help">
+            <div class="qrcode"></div>
+            <div class="tips">
+                <p>
+                    有关此问题的详细信息可以向我反馈
+                    <br />
+                    <br />
+                    QQ 
+                    <br />
+                    <br />
+                    Mail
+                    <br />
+                    <br />
+                    Blog
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // 随机增加
+        function randinc(stage, min, max, begin = true, end = true) {
+            var difference = max - min;
+            var interval = Math.floor(difference / stage);
+
+            console.log("interval: " + interval);
+            var value = [];
+            for (var i = 0; i < stage; i++) {
+                if (begin && i === 0) {
+                    value[i] = min;
+                }
+                else if (end && (i + 1 >= stage)) {
+                    value[i] = max;
+                }
+                else {
+                    value[i] = min + interval * i + Math.floor(Math.random() * interval);
+                }
+
+                console.log(value[i]);
+            }
+
+            return value;
+        }
+
+
+
+        // 倒计时跳转
+        window.onload = function () {
+            var sec = 10;
+            var last = sec;
+            var intervalid;
+            var value = randinc(sec + 1, 0, 100);
+            intervalid = setInterval(function () {
+                console.log("last: " + last);
+                if (last === 0) {
+                    window.location.href = "/";
+                    clearInterval(intervalid);
+                }
+                document.getElementById("sec").innerHTML = value[sec - last];
+                last--;
+            }, 1000);
+        };
+
+        // 禁用右键
+        document.oncontextmenu = function () {
+            return false;
+        }
+    </script>
+</body>
+
+</html>
